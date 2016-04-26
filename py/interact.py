@@ -171,7 +171,7 @@ class InteractiveConsole(object):
     "Refreshes the current page.",
     False
 )
-def cmd_refresh(self, *args):
+def cmd_refresh(self):
     self.refresh()
 
 
@@ -180,7 +180,7 @@ def cmd_refresh(self, *args):
     "Exits the interactive tutorial.",
     True
 )
-def cmd_exit(self, *args):
+def cmd_exit(self):
     raise InteractiveConsole.ExitCommand
 
 
@@ -190,8 +190,8 @@ def cmd_exit(self, *args):
     False,
     int
 )
-def cmd_history(self, *args):
-    self.change_history(args[0])
+def cmd_history(self, n):
+    self.change_history(n)
 
 
 @InteractiveConsole.command_global(
@@ -200,10 +200,10 @@ def cmd_history(self, *args):
     False,
     (int, 1)
 )
-def cmd_back(self, *args):
-    if args[0] <= 0:
+def cmd_back(self, n):
+    if n <= 0:
         raise InteractiveConsole.InvalidCommand("The first argument should be positive. Use \"forward\" instead.")
-    self.change_history(-args[0])
+    self.change_history(-n)
 
 
 @InteractiveConsole.command_global(
@@ -212,10 +212,10 @@ def cmd_back(self, *args):
     False,
     (int, 1)
 )
-def cmd_forward(self, *args):
-    if args[0] <= 0:
+def cmd_forward(self, n):
+    if n <= 0:
         raise InteractiveConsole.InvalidCommand("The first argument should be positive. Use \"back\" instead.")
-    self.change_history(args[0])
+    self.change_history(n)
 
 
 @InteractiveConsole.command_global(
@@ -224,8 +224,8 @@ def cmd_forward(self, *args):
     True,
     int
 )
-def cmd_page(self, *args):
-    if self.cur_scene.page(args[0] - 1):
+def cmd_page(self, n):
+    if self.cur_scene.page(n - 1):
         self.update_history()
 
 
@@ -235,10 +235,10 @@ def cmd_page(self, *args):
     True,
     (int, 1)
 )
-def cmd_prev(self, *args):
-    if args[0] <= 0:
+def cmd_prev(self, n):
+    if n <= 0:
         raise InteractiveConsole.InvalidCommand("The first argument should be positive. Use \"next\" instead.")
-    if self.cur_scene.page_change(-args[0]):
+    if self.cur_scene.page_change(-n):
         self.update_history()
 
 
@@ -248,10 +248,10 @@ def cmd_prev(self, *args):
     True,
     (int, 1)
 )
-def cmd_next(self, *args):
-    if args[0] <= 0:
+def cmd_next(self, n):
+    if n <= 0:
         raise InteractiveConsole.InvalidCommand("The first argument should be positive. Use \"prev\" instead.")
-    if self.cur_scene.page_change(args[0]):
+    if self.cur_scene.page_change(n):
         self.update_history()
 
 
@@ -270,7 +270,7 @@ Enter help for usage tips.
     "Go to the main menu.",
     True
 )
-def cmd_main(self, *args):
+def cmd_main(self):
     self.set_scene("Main Menu")
 
 
@@ -293,13 +293,13 @@ InteractiveConsole.add_scene_global(
     True,
     (str, "--simple")
 )
-def cmd_help(self, *args):
-    if args[0] in ["-A", "--all"]:
+def cmd_help(self, option):
+    if option in ["-A", "--all"]:
         _all = True
-    elif args[0] == "--simple":
+    elif option == "--simple":
         _all = False
     else:
-        raise InteractiveConsole.InvalidCommand("Invalid options: {}".format(args[0]))
+        raise InteractiveConsole.InvalidCommand("Invalid options: {}".format(option))
 
     if _all:
         help_scene = self.find_scene("Help (Advanced)")

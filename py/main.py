@@ -36,7 +36,7 @@ class Main(object):
             "View contents in this tutorial.",
             True
         )
-        def cmd_start(_self, *args):
+        def cmd_start(_self):
             _self.set_scene("Contents")
 
         @console.command(
@@ -45,11 +45,11 @@ class Main(object):
             True,
             int
         )
-        def cmd_chapter(_self, *args):
+        def cmd_chapter(_self, n):
             try:
-                _self.set_scene("Chapter {}".format(args[0]))
+                _self.set_scene("Chapter {}".format(n))
             except interact.InteractiveConsole.NoSuchSceneError:
-                _self.warn("There is no chapter {}.".format(args[0]))
+                _self.warn("There is no chapter {}.".format(n))
 
     def start_interactive(self):
         console = interact.InteractiveConsole()
