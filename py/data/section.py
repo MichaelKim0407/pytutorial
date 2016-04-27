@@ -4,8 +4,11 @@ __author__ = 'Michael'
 
 
 class SectionText(object):
-    def __init__(self, text=""):
-        self.items = [text]
+    def __init__(self, text="", items=None):
+        if items is None:
+            self.items = [text]
+        else:
+            self.items = items
 
     def __iadd__(self, other):
         if isinstance(other, str) or isinstance(other, unicode):
@@ -16,6 +19,21 @@ class SectionText(object):
         else:
             raise TypeError(other)
         return self
+
+    def strip(self):
+        def is_empty(item):
+            if not isinstance(item, str):
+                return False
+            elif item.strip():
+                return False
+            return True
+
+        items = list(self.items)
+        while items and is_empty(items[0]):
+            items.pop(0)
+        while items and is_empty(items[-1]):
+            items.pop()
+        return str(SectionText(items=items)).strip("\n")
 
     def __str__(self):
         result = ""
