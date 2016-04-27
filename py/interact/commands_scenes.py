@@ -28,10 +28,7 @@ def cmd_help(self, option):
     else:
         raise InvalidCommand("Invalid options: {}".format(option))
 
-    if _all:
-        help_scene = self.find_scene("Help (Advanced)")
-    else:
-        help_scene = self.find_scene("Help")
+    help_scene = self.find_scene("Help")
 
     help_scene.pages = []
     count = 10
@@ -51,7 +48,4 @@ def cmd_help(self, option):
 
         count += 1
 
-    if _all:
-        self.set_scene("Help (Advanced)")
-    else:
-        self.set_scene("Help")
+    self.set_scene("Help")
