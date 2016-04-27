@@ -1,8 +1,7 @@
 import scene
-
-from tag import *
 from item import *
 from section import *
+from tag import *
 
 __author__ = 'Michael'
 
