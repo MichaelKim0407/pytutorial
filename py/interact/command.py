@@ -70,3 +70,13 @@ class CommandArgsDef(list):
             for t in self:
                 result += " " + str(t)
             return result
+
+
+class CommandInfo(object):
+    def __init__(self, types, help_info, is_simple=False):
+        self.args_def = CommandArgsDef(*types)
+        self.help_info = help_info
+        self.is_simple = is_simple
+
+    def help_short(self, name):
+        return "\t{}\t\t{}\n\t\t\t{}".format(name, self.args_def, self.help_info)

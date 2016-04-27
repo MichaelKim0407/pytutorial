@@ -1,5 +1,5 @@
 import scene
-from command import CommandArgsDef
+from command import CommandInfo
 from error import InvalidCommand
 
 __author__ = 'Michael'
@@ -93,9 +93,7 @@ class InteractiveConsole(object):
     Commands = dict()
 
     @staticmethod
-    def _command(name, *types):
-        args_def = CommandArgsDef(*types)
-
+    def _command(name, args_def):
         def decor(func):
             def new_func(self, *args):
                 args = args_def.parse(name, *args)
@@ -103,25 +101,27 @@ class InteractiveConsole(object):
 
             return new_func
 
-        return args_def, decor
+        return decor
 
     @classmethod
-    def command_global(cls, name, help_info, simple, *types):
-        args_def, _decor = InteractiveConsole._command(name, *types)
+    def command_global(cls, name, *args):
+        cmd_info = CommandInfo(*args)
+        _decor = InteractiveConsole._command(name, cmd_info.args_def)
 
         def decor(func):
             new_func = _decor(func)
-            cls.Commands[name] = (new_func, args_def, help_info, simple)
+            cls.Commands[name] = (new_func, cmd_info)
             return new_func
 
         return decor
 
-    def command(self, name, help_info, simple, *types):
-        args_def, _decor = InteractiveConsole._command(name, *types)
+    def command(self, name, *args):
+        cmd_info = CommandInfo(*args)
+        _decor = InteractiveConsole._command(name, cmd_info.args_def)
 
         def decor(func):
             new_func = _decor(func)
-            self.commands[name] = (new_func, args_def, help_info, simple)
+            self.commands[name] = (new_func, cmd_info)
             return new_func
 
         return decor

@@ -7,6 +7,7 @@ __author__ = 'Michael'
 
 @InteractiveConsole.command_global(
     "main",
+    (),
     "Go to the main menu.",
     True
 )
@@ -16,9 +17,9 @@ def cmd_main(self):
 
 @InteractiveConsole.command_global(
     "help",
+    ((str, "--simple"),),
     "Open help menu. By default (--simple), only frequently used commands are listed. To view all commands, use -A/--all option",
-    True,
-    (str, "--simple")
+    True
 )
 def cmd_help(self, option):
     if option in ["-A", "--all"]:
@@ -40,11 +41,10 @@ def cmd_help(self, option):
         if count == 10:
             help_scene.pages.append(HELP_FULL_TEXT if _all else HELP_TEXT)
             count = 0
-        func, args_def, help_info, simple = self.commands[name]
-        if not (_all or simple):
+        func, cmd_info = self.commands[name]
+        if not (_all or cmd_info.is_simple):
             continue
-        append("\t{}\t\t{}\n".format(name, args_def))
-        append("\t\t\t{}\n".format(help_info))
+        append(cmd_info.help_short(name) + "\n")
 
         count += 1
 

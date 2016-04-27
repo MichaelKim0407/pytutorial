@@ -39,6 +39,7 @@ class Main(object):
 
         @console.command(
             "start",
+            (),
             "View contents in this tutorial.",
             True
         )
@@ -47,9 +48,9 @@ class Main(object):
 
         @console.command(
             "chapter",
+            ((int,),),
             "Open a chapter of the tutorial.",
-            True,
-            (int,)
+            True
         )
         def cmd_chapter(_self, n):
             try:
@@ -59,9 +60,8 @@ class Main(object):
 
         @console.command(
             "eg",
-            "View an example in the tutorial. The first argument is the chapter id and the second one the the example id.",
-            False,
-            (str,), (str,)
+            ((str,), (str,)),
+            "View an example in the tutorial. The first argument is the chapter id and the second one the the example id."
         )
         def cmd_eg(_self, chap_id, eg_id):
             try:
@@ -71,9 +71,8 @@ class Main(object):
 
         @console.command(
             "usage",
-            "View an usage in the tutorial. The first argument is the chapter id and the second one the the usage id.",
-            False,
-            (str,), (str,)
+            ((str,), (str,)),
+            "View an usage in the tutorial. The first argument is the chapter id and the second one the the usage id."
         )
         def cmd_usage(_self, chap_id, eg_id):
             try:
@@ -83,9 +82,8 @@ class Main(object):
 
         @console.command(
             "syntax",
-            "View a syntax definition in the tutorial. The first argument is the chapter id and the second one the the syntax id.",
-            False,
-            (str,), (str,)
+            ((str,), (str,)),
+            "View a syntax definition in the tutorial. The first argument is the chapter id and the second one the the syntax id."
         )
         def cmd_syntax(_self, chap_id, eg_id):
             try:
