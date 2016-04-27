@@ -1,0 +1,258 @@
+@chapter(5) Operators
+@section(1) Definition
+An operator is a symbol that operates on one or more values (called "operands") and returns value.
+It is similar to a function, only that the syntax is different.
+
+@section(2) Numerical operators
+@section(2.1) Unary operators
+[35;1m+[0m (positive)
+[35;1m-[0m (negative)
+
+@eg(1):
+{
+>>> +5
+5
+>>> -5
+-5
+}
+
+@section(2.2) Binary operators
+[35;1m+[0m (add)
+[35;1m-[0m (subtract)
+[35;1m*[0m (multiply)
+[35;1m/[0m (divide)
+[35;1m%[0m (mod)
+
+@eg(2):
+{
+>>> 1 + 2
+3
+>>> 3 * 4
+12
+>>> 10 % 3
+1
+}
+
+@section(2.3) Comparison operators
+[35;1m==[0m (equal)
+[35;1m!=[0m (unequal)
+[35;1m>[0m (greater than)
+[35;1m>=[0m (greater than or equal to)
+[35;1m<[0m (less than)
+[35;1m<=[0m (less than or equal to)
+
+@eg(3):
+{
+>>> 5 > 3
+True
+>>> 15 <= 15
+True
+>>> 3 == 7
+False
+}
+
+@section(3) Logical operators
+[35;1mand[0m: True only when both operands are True
+[35;1mor[0m: True when at least one operand is True
+
+@eg(4):
+{
+>>> True and True
+True
+>>> True and False
+False
+>>> True or False
+True
+}
+
+@pause()
+
+If the left operand already decides the result, the right operand will be ignored.
+
+@eg(5):
+{
+>>> def f():
+...     print("?")
+...     return True
+
+>>> True and f()
+?
+True
+>>> True or f()
+True
+>>> False and f()
+False
+>>> False or f()
+?
+True
+}
+
+@pause()
+
+This is very useful when the right operand may raise an error:
+
+@eg(6):
+{
+>>> x = 0
+>>> 10 % x == 0
+
+Traceback (most recent call last):
+  File "<pyshell#80>", line 1, in <module>
+    10 % x == 0
+ZeroDivisionError: integer division or modulo by zero
+>>> x != 0 and 10 % x == 0
+False
+}
+
+@section(4) Assigning operators
+[35;1m=[0m (assign)
+[35;1m+=[0m (add and assign)
+[35;1m-=[0m (subtract and assign)
+[35;1m*=[0m (multiply and assign)
+[35;1m/=[0m (divide and assign)
+[35;1m%=[0m (mod and assign)
+
+@eg(7):
+{
+>>> x = 10
+>>> x
+10
+>>> x += 5
+>>> x
+15
+>>> x *= 2
+>>> x
+30
+>>> x %= 7
+>>> x
+2
+}
+
+@section(5) Precedence
+Operator precedence defines, when en expression contains multiple operators, which operator will be calculated first.
+
+@section(5.1) Numerical operators
+For numerical operators, it is the same as how we deal with operators in maths:
+Unary [35;1m+[0m [35;1m-[0m are calculated first;
+[35;1m*[0m [35;1m/[0m [35;1m%[0m are calculated after;
+[35;1m+[0m [35;1m-[0m are calculated last.
+And calculation is done from left to right.
+
+@eg(8):
+{
+>>> 3 % 2 * 5
+5
+>>> 5 * -3
+-15
+>>> 1 + 2 * 3 - 4
+3
+}
+
+@section(5.2) Logical operators
+For logical operators:
+They are evaluated after numerical calculation is done.
+[35;1mand[0m is evaluated before [35;1mor[0m.
+
+@eg(9):
+{
+>>> True and False or True
+True
+>>> True or True and False
+True
+>>> 10 > 3 and 5 <= 6
+True
+}
+
+@section(5.3) Assigning operators
+Assigning operators are always operated last.
+
+@section(5.4) Parentheses
+Precedence can be overriden by using parentheses [35;1m()[0m.
+When precedence is not clear (i.e. when you are not sure), it is advised to use parentheses.
+
+@eg(10):
+{
+>>> 3 * (5 + 8)
+39
+>>> True and (True or False)
+True
+}
+
+@chapter(6) If Statement
+@section(1) if
+
+@syntax(1):
+{
+if [36;1mexpression[0m:
+    [33;7msuite[0m
+}
+
+[33;7msuite[0m will only be executed if [36;1mexpression[0m passes the evaluation.
+
+@eg(1):
+{
+>>> x = 10
+>>> if x % 2 == 0:
+...     print("x is an even number")
+...     if x % 3 == 0:
+...         print("x can also be divided by 3")
+
+
+x is an even number
+>>>
+}
+
+@section(2) elif and else
+
+@syntax(2):
+{
+if [36;1mexpression1[0m:
+    [33;7msuite1[0m
+elif [36;1mexpression2[0m:
+    [33;7msuite2[0m
+elif [36;1mexpression3[0m:
+    [33;7msuite3[0m
+...
+else:
+    [33;7msuite_else[0m
+}
+
+If [36;1mexpression1[0m passes the evaluation, [33;7msuite1[0m will be executed, and the rest will be skipped;
+otherwise, if [36;1mexpression2[0m passes the evaluation, [33;7msuite2[0m will be executed, and the rest will be skipped;
+...
+If none of the expressions pass the evaluation, [33;7msuite_else[0m will be executed.
+
+@eg(2):
+{
+>>> x = 10
+>>> if x % 3 == 0:
+...     print("0")
+... elif x % 3 == 1:
+...     print("1")
+... else:
+...     print("2")
+
+
+1
+}
+
+@pause()
+
+Note that if an expression passes the evaluation, all the remaining statements will be skipped,
+which means that, even if another expression can pass the evaluation, it will not be evaluated anyway.
+
+@eg(3):
+{
+>>> x = 2000
+>>> if x % 400 == 0:
+...     print("leap year")
+... elif x % 100 == 0:
+...     print("common year")
+... elif x % 4 == 0:
+...     print("leap year")
+... else:
+...     print("common year")
+
+
+leap year
+}
