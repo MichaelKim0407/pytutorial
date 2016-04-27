@@ -16,8 +16,8 @@ class Scene(object):
     def display(self, err_msg=""):
         clear_screen()
         if err_msg:
-            print err_msg
-        print "Page {}/{} in {}".format(self.cur_page + 1, len(self.pages), self.name)
+            print "\033[7m" + err_msg + "\033[0m"
+        print "Page {}/{} in \033[31;7m{}\033[0m".format(self.cur_page + 1, len(self.pages), self.name)
         print ""
         print self.pages[self.cur_page]
         if options.DEBUG:

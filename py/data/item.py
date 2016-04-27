@@ -2,8 +2,8 @@ __author__ = 'Michael'
 
 
 class Item(object):
-    Start = "* "
-    Brace = "------"
+    Start = "\033[34;1m*\033[0m "
+    Brace = "\033[34;1m------\033[0m"
 
     def __init__(self, type, id, text):
         self.type = type
