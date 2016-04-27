@@ -26,8 +26,8 @@ It is worth noting that in computer calculations, integers and non-integers are 
 Variable names need to start with a letter ([32;1ma[0m-[32;1mz[0m, [32;1mA[0m-[32;1mZ[0m) or an underscore ([32;1m_[0m).
 It can contain letters, underscores and numbers ([32;1m0[0m-[32;1m9[0m).
 
-Valid names: [31;1mmike[0m, [31;1m_i[0m, [31;1ma_programmer[0m, [31;1maBadName[0m
-Invalid names: [31;1m2k[0m, [31;1mproject-name[0m
+Valid names: [31;1mmike[0m, [31;1m_i[0m, [31;1ma_programmer[0m, [31;1maBadName[0m.
+Invalid names: [31;1m2k[0m, [31;1mproject-name[0m.
 
 @section(2) Assigning an variable
 Variables can be assigned a value by using the assign operator ([35;1m=[0m), and can be used in calculations thereafter.
@@ -92,7 +92,7 @@ However, strings and numbers cannot be added. Instead, strings can be formatted 
 
 @usage(1) [36;1mstring[0m.format([36;1mvalues[0m)
 
-There needs to be multiple braces ({}) in [36;1mstring[0m. Each value in [36;1mvalues[0m will be filled in one set of braces.
+There needs to be multiple braces ([32;1m{}[0m) in [36;1mstring[0m. Each value in [36;1mvalues[0m will be filled in one set of braces.
 
 @eg(2):
 {
@@ -154,7 +154,7 @@ Wake up!
 
 @pause()
 
-Optionally, a function can contain return statements, passing the values back to the caller.
+Optionally, a function can contain [35;1mreturn[0m statements, passing the values back to the caller.
 
 @eg(3):
 {

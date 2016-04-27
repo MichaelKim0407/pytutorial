@@ -2,7 +2,8 @@ characters [32;1m
 variables [31;1m
 usage variables [36;1m
 suite [33;7m
-operators [35;1m
+operators and keywords [35;1m
+types [36;2m
 
 [0m
 

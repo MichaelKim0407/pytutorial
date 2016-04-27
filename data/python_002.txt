@@ -52,8 +52,8 @@ False
 }
 
 @section(3) Logical operators
-[35;1mand[0m: True only when both operands are True
-[35;1mor[0m: True when at least one operand is True
+[35;1mand[0m: [35;1mTrue[0m only when both operands are [35;1mTrue[0m
+[35;1mor[0m: [35;1mTrue[0m when at least one operand is [35;1mTrue[0m
 
 @eg(4):
 {
@@ -136,7 +136,7 @@ For numerical operators, it is the same as how we deal with operators in maths:
 Unary [35;1m+[0m [35;1m-[0m are calculated first;
 [35;1m*[0m [35;1m/[0m [35;1m%[0m are calculated after;
 [35;1m+[0m [35;1m-[0m are calculated last.
-And calculation is done from left to right.
+Calculation is done from left to right.
 
 @eg(8):
 {
@@ -149,8 +149,7 @@ And calculation is done from left to right.
 }
 
 @section(5.2) Logical operators
-For logical operators:
-They are evaluated after numerical calculation is done.
+Logical operators are evaluated after numerical calculation is done.
 [35;1mand[0m is evaluated before [35;1mor[0m.
 
 @eg(9):
@@ -238,8 +237,7 @@ If none of the expressions pass the evaluation, [33;7msuite_else[0m will be ex
 
 @pause()
 
-Note that if an expression passes the evaluation, all the remaining statements will be skipped,
-which means that, even if another expression can pass the evaluation, it will not be evaluated anyway.
+Note that if an expression passes the evaluation, all the remaining statements will be skipped, which means that, even if another expression can pass the evaluation, it will not be evaluated anyway.
 
 @eg(3):
 {

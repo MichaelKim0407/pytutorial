@@ -12,7 +12,7 @@ In Python, a list is expressed with brackets ([32;1m[][0m) and commas ([32;1m
 @pause()
 
 Each value is given an index, starting from 0. The value can be accessed through its index.
-It is an error to use an index that is invalid.
+An [36;2mIndexError[0m is raised if the given index is invalid.
 
 @eg(2):
 {
@@ -176,8 +176,7 @@ Two lists can be added together, using the add operator ([35;1m+[0m).
 }
 
 @section(4.2) Negative index
-Python supports negative indices. While non-negative indices mean counting from the beginning (left),
-negative indices mean counting from the end (right).
+Python supports negative indices. While non-negative indices mean counting from the beginning (left), negative indices mean counting from the end (right).
 
 A list named [31;1ml[0m has a length of n:
 Position:       First   Second  Third   ... 2.Last  Last
@@ -196,7 +195,7 @@ Right access:   [31;1ml[0m[-n]   [31;1ml[0m[-n+1] [31;1ml[0m[-n+2] ... [3
 
 @pause()
 
-Like non-negative indices, negative indices will also result in [31;1mIndexError[0m if the index given is out of range.
+Like non-negative indices, negative indices will also result in [36;2mIndexError[0m if the index given is out of range.
 
 @eg(15):
 {
