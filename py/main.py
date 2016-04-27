@@ -58,6 +58,12 @@ class Main(object):
 
 
 if __name__ == "__main__":
+    from sys import argv
+
+    if len(argv) > 1 and argv[1] == "-d":
+        import options
+
+        options.DEBUG = True
     main = Main()
     main.load_dir("data", lambda n: n.startswith("python_") and n.endswith(".txt"))
     main.start_interactive()

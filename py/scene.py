@@ -1,5 +1,7 @@
 import mklibpy
 
+import options
+
 __author__ = 'Michael'
 
 clear_screen = mklibpy.terminal.clear_screen
@@ -8,7 +10,7 @@ clear_screen = mklibpy.terminal.clear_screen
 class Scene(object):
     def __init__(self, name, *pages):
         self.name = name
-        self.pages = pages
+        self.pages = list(pages)
         self.cur_page = 0
 
     def display(self, err_msg=""):
@@ -18,6 +20,9 @@ class Scene(object):
         print "Page {}/{} in {}".format(self.cur_page + 1, len(self.pages), self.name)
         print ""
         print self.pages[self.cur_page]
+        if options.DEBUG:
+            print ""
+            print repr(self.pages[self.cur_page])
 
     def page_change(self, n):
         changed = True
