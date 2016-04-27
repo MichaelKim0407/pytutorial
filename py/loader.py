@@ -53,6 +53,8 @@ class Parser(object):
             item = data.Item(tag.tag, tag.args[0], tag.content)
             self.cur_chap.items.append(item)
             self.cur_sect.text += item
+        elif tag.tag == "pause":
+            self.cur_sect.text += data.TextPause()
 
     def load_file(self, filename):
         with open(filename) as f:

@@ -3,6 +3,11 @@ from item import Item
 __author__ = 'Michael'
 
 
+class TextPause(object):
+    def __str__(self):
+        return "----- Pause -----\n"
+
+
 class SectionText(object):
     def __init__(self, text="", items=None):
         if items is None:
@@ -13,7 +18,7 @@ class SectionText(object):
     def __iadd__(self, other):
         if isinstance(other, str) or isinstance(other, unicode):
             self.items[-1] += other
-        elif isinstance(other, Item):
+        elif isinstance(other, Item) or isinstance(other, TextPause):
             self.items.append(other)
             self.items.append("")
         else:
@@ -44,13 +49,18 @@ class SectionText(object):
     def __repr__(self):
         return repr(self.__str__())
 
-    def __nonzero__(self):
-        for item in self.items:
-            if not isinstance(item, str):
-                return True
-            elif item.strip():
-                return True
-        return False
+    def split(self):
+        def __split():
+            items = []
+            for item in self.items:
+                if isinstance(item, TextPause):
+                    yield SectionText(items=items)
+                    items = []
+                else:
+                    items.append(item)
+            yield SectionText(items=items)
+
+        return list(__split())
 
 
 class Section(object):

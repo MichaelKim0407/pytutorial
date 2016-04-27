@@ -30,14 +30,15 @@ class Chapter(object):
         scene_name = "Chapter {}".format(self.chap_id)
         pages = ["Contents in this chapter\n\n{:tree}\n".format(self)]
         for sect, hier in self.base_section:
-            text = sect.text.strip()
-            if not text:
-                continue
-            page = ""
-            if hier:
-                for p in hier:
-                    page += repr(p) + "\n"
-                page += "\n"
-            page += text + "\n"
-            pages.append(page)
+            for text in sect.text.split():
+                text = text.strip()
+                if not text:
+                    continue
+                page = ""
+                if hier:
+                    for p in hier:
+                        page += repr(p) + "\n"
+                    page += "\n"
+                page += text + "\n"
+                pages.append(page)
         return scene.Scene(scene_name, *pages)
