@@ -42,3 +42,9 @@ class Chapter(object):
                 page += text + "\n"
                 pages.append(page)
         return scene.Scene(scene_name, *pages)
+
+    def find_item(self, type, id):
+        for _item in self.items:
+            if _item.type == type and _item.id == id:
+                return _item
+        raise ValueError(type, id)
