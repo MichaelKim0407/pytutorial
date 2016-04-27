@@ -16,4 +16,4 @@ class TagSyntaxError(Exception):
         self.tag = tag
 
     def __repr__(self):
-        return "No ending bracket found for tag {}".format(self.tag)
+        return "No ending brace found for tag {}".format(self.tag)

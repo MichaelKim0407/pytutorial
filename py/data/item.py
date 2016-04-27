@@ -3,7 +3,7 @@ __author__ = 'Michael'
 
 class Item(object):
     Start = "* "
-    Bracket = "------"
+    Brace = "------"
 
     def __init__(self, type, id, text):
         self.type = type
@@ -17,4 +17,4 @@ class Item(object):
 
     def __str__(self):
         return Item.Start + self.__repr__() + "\n" \
-               + Item.Bracket + "\n" + self.text + Item.Bracket + "\n"
+               + Item.Brace + "\n" + self.text + Item.Brace + "\n"
