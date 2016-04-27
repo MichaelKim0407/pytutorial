@@ -1,5 +1,3 @@
-import code
-
 from error import InvalidCommand
 from interact import InteractiveConsole
 from scenes import HELP_TEXT, HELP_FULL_TEXT
@@ -57,18 +55,3 @@ def cmd_help(self, option):
         self.set_scene("Help (Advanced)")
     else:
         self.set_scene("Help")
-
-
-@InteractiveConsole.command_global(
-    "python",
-    "Start interactive Python console.",
-    True
-)
-def cmd_python(self):
-    def exit_console():
-        raise SystemExit
-
-    try:
-        code.interact(local={"exit": exit_console})
-    except SystemExit:
-        self.refresh()

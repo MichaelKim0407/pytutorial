@@ -1,3 +1,7 @@
+import subprocess
+
+from mklibpy.util.path import CD
+
 from error import InvalidCommand
 from interact import InteractiveConsole
 
@@ -91,3 +95,14 @@ def cmd_next(self, n):
         raise InvalidCommand("The first argument should be positive. Use \"prev\" instead.")
     if self.cur_scene.page_change(n):
         self.update_history()
+
+
+@InteractiveConsole.command_global(
+    "python",
+    "Start interactive Python console, or run a Python script.",
+    True,
+    None
+)
+def cmd_python(self, *args):
+    with CD("scripts"):
+        subprocess.call(["python"] + list(args))

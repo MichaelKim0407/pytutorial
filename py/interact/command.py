@@ -29,34 +29,44 @@ class CommandArgDef(object):
 
 class CommandArgsDef(list):
     def __init__(self, *types):
-        list.__init__(self)
-        _def = False
-        self.required = 0
-        for t in types:
-            t = CommandArgDef(*t)
-            self.append(t)
-            if t.default_value is not None:
-                _def = True
-            elif _def:
-                raise TypeSyntaxError
-            else:
-                self.required += 1
+        if types == (None,):
+            self.any = True
+        else:
+            self.any = False
+            list.__init__(self)
+            _def = False
+            self.required = 0
+            for t in types:
+                t = CommandArgDef(*t)
+                self.append(t)
+                if t.default_value is not None:
+                    _def = True
+                elif _def:
+                    raise TypeSyntaxError
+                else:
+                    self.required += 1
 
     def parse(self, cmd_name, *args):
-        if len(args) < self.required:
-            raise InvalidCommand("Command {} requires {} argument(s).".format(cmd_name, self.required))
-        elif len(args) > len(self):
-            raise InvalidCommand("Command {} takes at most {} argument(s).".format(cmd_name, len(self)))
+        if self.any:
+            return list(args)
+        else:
+            if len(args) < self.required:
+                raise InvalidCommand("Command {} requires {} argument(s).".format(cmd_name, self.required))
+            elif len(args) > len(self):
+                raise InvalidCommand("Command {} takes at most {} argument(s).".format(cmd_name, len(self)))
 
-        parsed_args = []
-        for i in range(len(args)):
-            parsed_args.append(self[i].cast(i, args[i]))
-        for i in range(len(args), len(self)):
-            parsed_args.append(self[i].default_value)
-        return parsed_args
+            parsed_args = []
+            for i in range(len(args)):
+                parsed_args.append(self[i].cast(i, args[i]))
+            for i in range(len(args), len(self)):
+                parsed_args.append(self[i].default_value)
+            return parsed_args
 
     def __str__(self):
-        result = "Takes {} argument(s).".format(len(self))
-        for t in self:
-            result += " " + str(t)
-        return result
+        if self.any:
+            return "Takes * arguments."
+        else:
+            result = "Takes {} argument(s).".format(len(self))
+            for t in self:
+                result += " " + str(t)
+            return result
