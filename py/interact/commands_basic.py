@@ -5,7 +5,7 @@ __author__ = 'Michael'
 
 @InteractiveConsole.command_global(
     "refresh",
-    "Refreshes the current page.",
+    "Refresh the current page.",
     False
 )
 def cmd_refresh(self, *args):
@@ -14,7 +14,7 @@ def cmd_refresh(self, *args):
 
 @InteractiveConsole.command_global(
     "exit",
-    "Exits the interactive tutorial.",
+    "Exit the interactive tutorial.",
     True
 )
 def cmd_exit(self, *args):
