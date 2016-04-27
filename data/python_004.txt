@@ -1,0 +1,192 @@
+@chapter(8) Loops
+@section(1) For loop
+
+@syntax(1):
+{
+for [36;1mitem[0m in [36;1mcollection[0m:
+    [33;7msuite[0m
+}
+
+Each time, an item from [36;1mcollection[0m will be assigned to [36;1mitem[0m and [33;7msuite[0m will be executed.
+[36;1mcollection[0m can be a list:
+
+@eg(1):
+{
+>>> for i in [1, 3, 4]:
+...     print i
+
+
+1
+3
+4
+}
+
+@pause()
+
+[36;1mcollection[0m can be a string:
+
+@eg(2):
+{
+>>> for char in "hello":
+...     print char
+
+
+h
+e
+l
+l
+o
+}
+
+@pause()
+
+[36;1mcollection[0m can also be other things, but we will not introduce them now.
+
+@section(2) continue and break
+A [35;1mcontinue[0m statement in a loop stops the current run, and immediately enters the next run.
+
+@eg(3):
+{
+>>> for i in range(5):
+...     if i == 3:
+...         continue
+...     print i
+
+
+0
+1
+2
+4
+}
+
+@pause()
+
+A [35;1mbreak[0m statement terminates the whole loop.
+
+@eg(4):
+{
+>>> for i in range(5):
+...     if i == 3:
+...         break
+...     print i
+
+
+0
+1
+2
+}
+
+@section(3) While loop
+
+@syntax(2):
+{
+while [36;1mexpression[0m:
+    [33;7msuite[0m
+}
+
+[33;7msuite[0m will be executed as long as [36;1mexpression[0m passes the evaluation.
+
+@eg(5):
+{
+>>> x = 10
+>>> while x > 0:
+...     print x
+...     x -= 1
+
+
+10
+9
+8
+7
+6
+5
+4
+3
+2
+1
+}
+
+@pause()
+
+When using the while loop, it is important to ensure that the loop can finish, either using proper [36;1mexpression[0m or using the [35;1mbreak[0m statement.
+If it is difficult to write [36;1mexpression[0m, or if you want to end the loop in the middle of [33;7msuite[0m, the [35;1mbreak[0m statement becomes very handy.
+
+@eg(6):
+{
+>>> def f1(x):
+...     # does not print 0
+...     while x != 0:
+...         print x
+...         if x > 0:
+...             x -= 1
+...         else:
+...             x += 1
+
+
+>>> def f2(x):
+...     # always prints 0
+...     while True:
+...         print x
+...         if x == 0:
+...             break
+...         elif x > 0:
+...             x -= 1
+...         else:
+...             x += 1
+
+
+>>> f1(3)
+3
+2
+1
+>>> f2(3)
+3
+2
+1
+0
+>>> f1(-2)
+-2
+-1
+>>> f2(-2)
+-2
+-1
+0
+>>> f1(0)
+>>> f2(0)
+0
+}
+
+@section(4) else
+
+@syntax(3):
+{
+for [36;1mitem[0m in [36;1mcollection[0m:
+    [33;7msuite_loop[0m
+else:
+    [33;7msuite_else[0m
+
+while [36;1mexpression[0m:
+    [33;7msuite_loop[0m
+else:
+    [33;7msuite_else[0m
+}
+
+[33;7msuite_else[0m is executed only if the loop finished without hitting a [35;1mbreak[0m statement.
+Important: The usage of [35;1melse[0m here is not to be confused with that in the [35;1mif[0m statement.
+
+@eg(7):
+{
+>>> def is_prime(x):
+...     for i in range(2, x):
+...         if x % i == 0:
+...             result = False
+...             break
+...     else:
+...         result = True
+...     return result
+
+>>> is_prime(15)
+False
+>>> is_prime(7)
+True
+}
