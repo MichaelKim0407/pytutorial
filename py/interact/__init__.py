@@ -67,6 +67,8 @@ class InteractiveConsole(object):
         while True:
             usr_input = raw_input(":")
             split = usr_input.split()
+            if not split:
+                continue
             cmd, args = split[0], split[1:]
             if cmd not in self.commands:
                 self.warn("No such command: \"{}\".".format(cmd))
