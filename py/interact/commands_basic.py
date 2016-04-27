@@ -8,7 +8,7 @@ __author__ = 'Michael'
     "Refresh the current page.",
     False
 )
-def cmd_refresh(self, *args):
+def cmd_refresh(self):
     self.refresh()
 
 
@@ -17,7 +17,7 @@ def cmd_refresh(self, *args):
     "Exit the interactive tutorial.",
     True
 )
-def cmd_exit(self, *args):
+def cmd_exit(self):
     raise InteractiveConsole.ExitCommand
 
 

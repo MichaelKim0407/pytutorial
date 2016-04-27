@@ -11,7 +11,7 @@ __author__ = 'Michael'
     "Go to the main menu.",
     True
 )
-def cmd_main(self, *args):
+def cmd_main(self):
     self.set_scene("Main Menu")
 
 
@@ -70,7 +70,7 @@ def cmd_help(self, option):
     "Start interactive Python console.",
     True
 )
-def cmd_python(self, *args):
+def cmd_python(self):
     def exit_console():
         raise SystemExit
 
