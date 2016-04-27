@@ -1,6 +1,7 @@
 import code
 
 from interact import InteractiveConsole
+from scenes import HELP_TEXT, HELP_FULL_TEXT
 
 __author__ = 'Michael'
 
@@ -41,7 +42,7 @@ def cmd_help(self, option):
 
     for name in sorted(self.commands.keys()):
         if count == 10:
-            help_scene.pages.append("A list of available commands:\n\tName\t\tNotes\n")
+            help_scene.pages.append(HELP_FULL_TEXT if _all else HELP_TEXT)
             count = 0
         func, types, help_info, simple = self.commands[name]
         if not (_all or simple):

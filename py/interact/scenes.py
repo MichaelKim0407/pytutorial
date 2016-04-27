@@ -12,14 +12,21 @@ Enter help for usage tips.
 """
 )
 
+HELP_TEXT = """For the full list, use \"help -A\"
+A list of useful commands:
+\tName\t\tNotes
+"""
+
 InteractiveConsole.add_scene_global(
     "Help",
-    """A list of useful commands:
-\tName\t\tNotes"""
+    HELP_TEXT
 )
+
+HELP_FULL_TEXT = """A list of available commands:
+\tName\t\tNotes
+"""
 
 InteractiveConsole.add_scene_global(
     "Help (Advanced)",
-    """A list of available commands:
-\tName\t\tNotes"""
+    HELP_FULL_TEXT
 )
