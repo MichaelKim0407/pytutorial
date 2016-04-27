@@ -1,0 +1,239 @@
+@chapter(7) List
+@section(1) Definition
+A list is a number of values with a given sequence.
+In Python, a list is expressed with brackets ([32;1m[][0m) and commas ([32;1m,[0m).
+
+@eg(1):
+{
+>>> [1, 2, 3, 7, 6]
+[1, 2, 3, 7, 6]
+}
+
+@pause()
+
+Each value is given an index, starting from 0. The value can be accessed through its index.
+It is an error to use an index that is invalid.
+
+@eg(2):
+{
+>>> l = [1, 2, 3, 7, 6]
+>>> l[1]
+2
+>>> l[3] = 18
+>>> l
+[1, 2, 3, 18, 6]
+>>> l[7]
+
+Traceback (most recent call last):
+  File "<pyshell#93>", line 1, in <module>
+    l[7]
+IndexError: list index out of range
+}
+
+@pause()
+
+A list itself is also a value, which means it can be assigned to a variable, or be contained in another list.
+
+@eg(3):
+{
+>>> l = [1, 3, [4, 5], 7]
+>>> l[2]
+[4, 5]
+>>> l[2][1]
+5
+}
+
+@pause()
+
+A list can be empty.
+
+@eg(4):
+{
+>>> []
+[]
+}
+
+@section(2) List operations
+Apart from accessing values through index, there are also several useful operations.
+
+@section(2.1) append
+Appending adds a value at the end of the list.
+
+@usage(1) [36;1mlist[0m.append([36;1mvalue[0m)
+
+@eg(5):
+{
+>>> l = [1, 3]
+>>> l.append(5)
+>>> l
+[1, 3, 5]
+}
+
+@section(2.2) insert
+Apart from adding a value to the end, you can also insert a value between two values, shifting the following indices.
+
+@usage(2) [36;1mlist[0m.insert([36;1mindex[0m, [36;1mvalue[0m)
+
+@eg(6):
+{
+>>> l = [1, 3]
+>>> l.insert(1, 2)
+>>> l
+[1, 2, 3]
+}
+
+@section(2.3) remove
+
+@usage(3) [36;1mlist[0m.remove([36;1mvalue[0m)
+
+@eg(7):
+{
+>>> l = [1, 4, 6]
+>>> l.remove(4)
+>>> l
+[1, 6]
+}
+
+When there are more than one identical values in the list, the first one will be removed.
+
+@eg(8):
+{
+>>> l = [0, 10, 1, 10, 2, 10]
+>>> l.remove(10)
+>>> l
+[0, 1, 10, 2, 10]
+}
+
+@section(2.4) pop
+Remove a value by its index. This is useful when one or more identical values exist in the list.
+
+@usage(4) [36;1mlist[0m.pop([36;1mindex[0m)
+
+@eg(9):
+{
+>>> l = [0, 10, 1, 10, 2, 10]
+>>> l.pop(3)
+10
+>>> l
+[0, 10, 1, 2, 10]
+}
+
+@section(3) Built-in functions
+@section(3.1) len
+
+@usage(5) len([36;1mlist[0m)
+
+returns the length of [36;1mlist[0m (i.e. how many values there are in [36;1mlist[0m).
+
+@eg(10):
+{
+>>> len([])
+0
+>>> len([1, 3])
+2
+}
+
+@section(3.2) range
+
+@usage(6) range([36;1mstop[0m)
+
+returns a list containing all integers from 0 to [36;1mstop[0m (excluding [36;1mstop[0m)
+
+@eg(11):
+{
+>>> range(10)
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+}
+
+@pause()
+
+@usage(7):
+{
+range([36;1mstart[0m, [36;1mstop[0m)
+range([36;1mstart[0m, [36;1mstop[0m, [36;1mstep[0m)
+}
+
+@eg(12):
+{
+>>> range(2, 6)
+[2, 3, 4, 5]
+>>> range(3, 9, 2)
+[3, 5, 7]
+}
+
+@section(4) Advanced usages
+@section(4.1) Adding
+Two lists can be added together, using the add operator ([35;1m+[0m).
+
+@eg(13):
+{
+>>> [1] + [3, 8]
+[1, 3, 8]
+>>> l = [2, 6, 7]
+>>> l += [5, 1]
+>>> l
+[2, 6, 7, 5, 1]
+}
+
+@section(4.2) Negative index
+Python supports negative indices. While non-negative indices mean counting from the beginning (left),
+negative indices mean counting from the end (right).
+
+A list named [31;1ml[0m has a length of n:
+Position:       First   Second  Third   ... 2.Last  Last
+Index:          0       1       2       ... n-2     n-1
+Left access:    [31;1ml[0m[0]    [31;1ml[0m[1]    [31;1ml[0m[2]    ... [31;1ml[0m[n-2]  [31;1ml[0m[n-1]
+Right access:   [31;1ml[0m[-n]   [31;1ml[0m[-n+1] [31;1ml[0m[-n+2] ... [31;1ml[0m[-2]   [31;1ml[0m[-1]
+
+@eg(14):
+{
+>>> l = range(5)
+>>> l
+[0, 1, 2, 3, 4]
+>>> l[-1]
+4
+}
+
+@pause()
+
+Like non-negative indices, negative indices will also result in [31;1mIndexError[0m if the index given is out of range.
+
+@eg(15):
+{
+>>> l = range(3, 7)
+>>> l
+[3, 4, 5, 6]
+>>> l[4]
+
+Traceback (most recent call last):
+  File "<pyshell#25>", line 1, in <module>
+    l[4]
+IndexError: list index out of range
+>>> l[-5]
+
+Traceback (most recent call last):
+  File "<pyshell#26>", line 1, in <module>
+    l[-5]
+IndexError: list index out of range
+}
+
+@section(4.3) Slicing
+A part of the list can be retrieved by slicing:
+
+@usage(8) [36;1mlist[0m[[36;1mstart[0m:[36;1mstop[0m]
+
+returns a list containing the values of [36;1mlist[0m, from index [36;1mstart[0m to [36;1mstop[0m (excluding [36;1mstop[0m).
+Negative indices can be used in slicing.
+
+@eg(16):
+{
+>>> l = range(3, 7)
+>>> l
+[3, 4, 5, 6]
+>>> l[1:3]
+[4, 5]
+>>> l[1:]
+[4, 5, 6]
+>>> l[:-1]
+[3, 4, 5]
+}
