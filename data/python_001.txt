@@ -1,0 +1,166 @@
+@chapter(1) Basic Calculation
+Python can be used as a calculator.
+
+@eg(1):
+{
+>>> 1 + 2 + 3
+6
+>>> 3.14 * 2
+6.28
+}
+
+@pause()
+
+It is worth noting that in computer calculations, integers and non-integers are completely different. When both operands are integers, the calculation will be integral.
+
+@eg(2):
+{
+>>> 6 / 5
+1
+>>> 6.0 / 5
+1.2
+}
+
+@chapter(2) Variables
+@section(1) Variable names
+Variable names need to start with a letter ([32;1ma[0m-[32;1mz[0m, [32;1mA[0m-[32;1mZ[0m) or an underscore ([32;1m_[0m).
+It can contain letters, underscores and numbers ([32;1m0[0m-[32;1m9[0m).
+
+Valid names: [31;1mmike[0m, [31;1m_i[0m, [31;1ma_programmer[0m, [31;1maBadName[0m
+Invalid names: [31;1m2k[0m, [31;1mproject-name[0m
+
+@section(2) Assigning an variable
+Variables can be assigned a value by using the assign operator ([32;1m=[0m), and can be used in calculations thereafter.
+
+@eg(1):
+{
+>>> x = 5
+>>> x
+5
+>>> x * 3
+15
+}
+
+@pause()
+
+Variables must be assigned before usage.
+
+@eg(2):
+{
+>>> y
+
+Traceback (most recent call last):
+  File "<pyshell#7>", line 1, in <module>
+    y
+NameError: name 'y' is not defined
+>>> y = 0
+>>> y
+0
+}
+
+@pause()
+
+Variables can be reassigned.
+
+@eg(3):
+{
+>>> x = 5
+>>> x * 3
+15
+>>> x = 7
+>>> x * 3
+21
+}
+
+@chapter(3) Strings
+Strings are literals that are quoted using single quotes ([32;1m'[0m) or double quotes ([32;1m"[0m). Both are the same in Python.
+They can be added up to create a longer string.
+
+@eg(1):
+{
+>>> s = "Hello!"
+>>> s
+'Hello!'
+>>> name = "Michael Kim"
+>>> s + " I am " + name + "."
+'Hello! I am Michael Kim.'
+}
+
+@pause()
+
+However, strings and numbers cannot be added. Instead, strings can be formatted with numbers (or, strings, of course).
+
+@usage(1) [36;1mstring[0m.format([36;1mvalues[0m)
+
+There needs to be multiple braces ({}) in [36;1mstring[0m. Each value in [36;1mvalues[0m will be filled in one set of braces.
+
+@eg(2):
+{
+>>> "I am {} years old.".format(9)
+'I am 9 years old.'
+}
+
+@pause()
+
+Braces can be indexed or even keyworded, allowing you to better organize your values.
+
+@eg(3):
+{
+>>> "{0} {1} {0} {name}".format(10, 5, name="xyz")
+'10 5 10 xyz'
+}
+
+@chapter(4) Functions
+@section(1) Definition
+A function is a procedure that (optionally) takes input values, completes a certain task, and (also optionally) provides output values.
+Functions can be reused. They also simplify the code, making it more understandable.
+
+@section(2) Built-in functions
+Python provides a series of useful functions, which will be gradually covered afterwards. Here we introduce one of them:
+
+@usage(1):
+{
+print([36;1mobject[0m)
+or in old style:
+print [36;1mobject[0m
+}
+
+@eg(1):
+{
+>>> x = 10
+>>> print(x)
+10
+}
+
+@section(3) Defining functions
+
+@syntax(1):
+{
+def [36;1mfunc_name[0m([36;1marguments[0m):
+    [33;7msuite[0m
+}
+
+[36;1mfunc_name[0m and names of [36;1marguments[0m follow the rule for naming variables. [36;1marguments[0m, whose values are passed from the caller, can be used in [33;7msuite[0m.
+The number of [36;1marguments[0m is not limited; it can be zero.
+
+@eg(2):
+{
+>>> def wake_up():
+...    print("Wake up!")
+
+>>> wake_up()
+Wake up!
+}
+
+@pause()
+
+Optionally, a function can contain return statements, passing the values back to the caller.
+
+@eg(3):
+{
+>>> def squared(x):
+...    return x * x
+
+>>> print("{} squared is {}".format(5, squared(5)))
+5 squared is 25
+}
