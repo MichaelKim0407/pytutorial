@@ -1,4 +1,4 @@
-import chapter
+import data
 
 __author__ = 'Michael'
 
@@ -34,23 +34,23 @@ class Parser(object):
                 else:
                     content += lines[0] + "\n"
             else:
-                raise chapter.TagSyntaxError(tag)
-        return chapter.Tag(tag, args, content)
+                raise data.TagSyntaxError(tag)
+        return data.Tag(tag, args, content)
 
     def run_tag(self, tag):
         if tag.tag in ["encode", "encoding"]:
             self.encoding = tag.args[0] or tag.content
         elif tag.tag == "chapter":
-            self.cur_chap = chapter.Chapter(self.encoding, tag.args[0], tag.content)
+            self.cur_chap = data.Chapter(self.encoding, tag.args[0], tag.content)
             self.chapters.append(self.cur_chap)
             self.cur_sect = self.cur_chap.base_section
         elif tag.tag == "section":
-            self.cur_sect = chapter.Section(tag.args[0], tag.content)
+            self.cur_sect = data.Section(tag.args[0], tag.content)
             self.cur_chap.base_section.sections.append(self.cur_sect)
         elif tag.tag in ["eg", "example", "usage", "syntax"]:
             if tag.tag == "example":
                 tag.tag = "eg"
-            item = chapter.Item(tag.tag, tag.args[0], tag.content)
+            item = data.Item(tag.tag, tag.args[0], tag.content)
             self.cur_chap.items.append(item)
             self.cur_sect.text += item
 

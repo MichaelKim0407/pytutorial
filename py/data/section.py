@@ -1,47 +1,6 @@
-import scene
+from item import Item
 
 __author__ = 'Michael'
-
-
-class Tag(object):
-    def __init__(self, tag, args, content):
-        self.tag = tag
-        self.args = args
-        self.content = content
-
-    def __repr__(self):
-        return "tag: {!r}, args: {!r}, content: {!r}".format(self.tag, self.args, self.content)
-
-
-class TagSyntaxError(Exception):
-    def __init__(self, tag):
-        self.tag = tag
-
-    def __repr__(self):
-        return "No ending bracket found for tag {}".format(self.tag)
-
-
-class ParseError(Exception):
-    pass
-
-
-class Item(object):
-    Start = "* "
-    Bracket = "------"
-
-    def __init__(self, type, id, text):
-        self.type = type
-        self.id = id
-        self.text = text
-        if not text.endswith("\n"):
-            self.text += "\n"
-
-    def __repr__(self):
-        return self.type + " " + self.id
-
-    def __str__(self):
-        return Item.Start + self.__repr__() + "\n" \
-               + Item.Bracket + "\n" + self.text + Item.Bracket + "\n"
 
 
 class SectionText(object):
@@ -135,37 +94,3 @@ class Section(object):
         for sect in self.sections:
             for leaf, hierarchy in sect:
                 yield leaf, [sect] + hierarchy
-
-
-class Chapter(object):
-    def __init__(self, encoding, chap_id, chap_title):
-        self.encoding = encoding
-        self.chap_id = chap_id
-        self.base_section = Section("", chap_title)
-        self.items = []
-
-    def __repr__(self):
-        return "Chapter {} {}".format(self.chap_id, self.base_section.title)
-
-    def __str__(self):
-        return "Chapter {}{}".format(self.chap_id, self.base_section)
-
-    def __format__(self, spec):
-        if spec == "":
-            return self.__str__()
-        elif spec == "tree":
-            return "Chapter {}{:tree}".format(self.chap_id, self.base_section)
-
-    def gen_scene(self):
-        scene_name = "Chapter {}".format(self.chap_id)
-        pages = ["Contents in this chapter\n\n{:tree}\n".format(self)]
-        for sect, hier in self.base_section:
-            if not sect.text:
-                continue
-            page = ""
-            for p in hier:
-                page += repr(p) + "\n"
-            page += "\n"
-            page += str(sect.text)
-            pages.append(page)
-        return scene.Scene(scene_name, *pages)
