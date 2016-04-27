@@ -1,16 +1,11 @@
 import scene
+from command import CommandArgsDef
+from error import InvalidCommand
 
 __author__ = 'Michael'
 
 
 class InteractiveConsole(object):
-    class TypeSyntaxError(Exception):
-        pass
-
-    class InvalidCommand(Exception):
-        def __init__(self, msg):
-            self.msg = msg
-
     class ExitCommand(Exception):
         pass
 
@@ -75,7 +70,7 @@ class InteractiveConsole(object):
             else:
                 try:
                     self.commands[cmd][0](self, *args)
-                except InteractiveConsole.InvalidCommand as e:
+                except InvalidCommand as e:
                     self.warn("Invalid command: \"{}\". {}".format(usr_input, e.msg))
                 except InteractiveConsole.ExitCommand:
                     break
@@ -99,70 +94,34 @@ class InteractiveConsole(object):
 
     @staticmethod
     def _command(name, *types):
-        # First check types is valid
-        _def = False
-        required = 0
-        for t in types:
-            if isinstance(t, tuple):
-                _def = True
-            elif _def:
-                raise InteractiveConsole.TypeSyntaxError
-            else:
-                required += 1
+        args_def = CommandArgsDef(*types)
 
         def decor(func):
             def new_func(self, *args):
-                # Check number of arguments
-                if len(args) < required:
-                    raise InteractiveConsole.InvalidCommand(
-                        "Command \"{}\" requires {} argument(s).".format(name, required))
-                elif len(args) > len(types):
-                    raise InteractiveConsole.InvalidCommand(
-                        "Command \"{}\" takes at most {} argument(s).".format(name, len(types)))
-
-                # Convert arguments to type
-                args = list(args)
-                for i in range(len(args)):
-                    if i < required:
-                        t = types[i]
-                    else:
-                        t = types[i][0]
-                    if t == str:
-                        continue
-                    try:
-                        args[i] = t(args[i])
-                    except ValueError:
-                        raise InteractiveConsole.InvalidCommand(
-                            "Parameter {} must be of type {}.".format(i + 1, t.__name__))
-
-                # Fill default values
-                for i in range(len(args), len(types)):
-                    args.append(types[i][1])
-
-                # Call function
+                args = args_def.parse(name, *args)
                 return func(self, *args)
 
             return new_func
 
-        return decor
+        return args_def, decor
 
     @classmethod
     def command_global(cls, name, help_info, simple, *types):
-        _decor = InteractiveConsole._command(name, *types)
+        args_def, _decor = InteractiveConsole._command(name, *types)
 
         def decor(func):
             new_func = _decor(func)
-            cls.Commands[name] = (new_func, types, help_info, simple)
+            cls.Commands[name] = (new_func, args_def, help_info, simple)
             return new_func
 
         return decor
 
     def command(self, name, help_info, simple, *types):
-        _decor = InteractiveConsole._command(name, *types)
+        args_def, _decor = InteractiveConsole._command(name, *types)
 
         def decor(func):
             new_func = _decor(func)
-            self.commands[name] = (new_func, types, help_info, simple)
+            self.commands[name] = (new_func, args_def, help_info, simple)
             return new_func
 
         return decor

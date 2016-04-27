@@ -49,7 +49,7 @@ class Main(object):
             "chapter",
             "Open a chapter of the tutorial.",
             True,
-            int
+            (int,)
         )
         def cmd_chapter(_self, n):
             try:
@@ -61,7 +61,7 @@ class Main(object):
             "eg",
             "View an example in the tutorial. The first argument is the chapter id and the second one the the example id.",
             False,
-            str, str
+            (str,), (str,)
         )
         def cmd_eg(_self, chap_id, eg_id):
             try:
@@ -73,7 +73,7 @@ class Main(object):
             "usage",
             "View an usage in the tutorial. The first argument is the chapter id and the second one the the usage id.",
             False,
-            str, str
+            (str,), (str,)
         )
         def cmd_usage(_self, chap_id, eg_id):
             try:
@@ -85,7 +85,7 @@ class Main(object):
             "syntax",
             "View a syntax definition in the tutorial. The first argument is the chapter id and the second one the the syntax id.",
             False,
-            str, str
+            (str,), (str,)
         )
         def cmd_syntax(_self, chap_id, eg_id):
             try:

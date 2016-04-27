@@ -1,5 +1,6 @@
 import code
 
+from error import InvalidCommand
 from interact import InteractiveConsole
 from scenes import HELP_TEXT, HELP_FULL_TEXT
 
@@ -27,7 +28,7 @@ def cmd_help(self, option):
     elif option == "--simple":
         _all = False
     else:
-        raise InteractiveConsole.InvalidCommand("Invalid options: {}".format(option))
+        raise InvalidCommand("Invalid options: {}".format(option))
 
     if _all:
         help_scene = self.find_scene("Help (Advanced)")
@@ -44,17 +45,10 @@ def cmd_help(self, option):
         if count == 10:
             help_scene.pages.append(HELP_FULL_TEXT if _all else HELP_TEXT)
             count = 0
-        func, types, help_info, simple = self.commands[name]
+        func, args_def, help_info, simple = self.commands[name]
         if not (_all or simple):
             continue
-        append("\t{}\t\tTakes {} argument(s). ".format(name, len(types)))
-        if types:
-            for t in types:
-                if isinstance(t, tuple):
-                    append("{}({}) ".format(t[0].__name__, t[1]))
-                else:
-                    append("{} ".format(t.__name__))
-        append("\n")
+        append("\t{}\t\t{}\n".format(name, args_def))
         append("\t\t\t{}\n".format(help_info))
 
         count += 1

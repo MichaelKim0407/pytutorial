@@ -1,3 +1,4 @@
+from error import InvalidCommand
 from interact import InteractiveConsole
 
 __author__ = 'Michael'
@@ -25,7 +26,7 @@ def cmd_exit(self):
     "history",
     "Change to a page you recently viewed.",
     False,
-    int
+    (int,)
 )
 def cmd_history(self, n):
     self.change_history(n)
@@ -39,7 +40,7 @@ def cmd_history(self, n):
 )
 def cmd_back(self, n):
     if n <= 0:
-        raise InteractiveConsole.InvalidCommand("The first argument should be positive. Use \"forward\" instead.")
+        raise InvalidCommand("The first argument should be positive. Use \"forward\" instead.")
     self.change_history(-n)
 
 
@@ -51,7 +52,7 @@ def cmd_back(self, n):
 )
 def cmd_forward(self, n):
     if n <= 0:
-        raise InteractiveConsole.InvalidCommand("The first argument should be positive. Use \"back\" instead.")
+        raise InvalidCommand("The first argument should be positive. Use \"back\" instead.")
     self.change_history(n)
 
 
@@ -59,7 +60,7 @@ def cmd_forward(self, n):
     "page",
     "Turn to a different page in the current scene.",
     True,
-    int
+    (int,)
 )
 def cmd_page(self, n):
     if self.cur_scene.page(n - 1):
@@ -74,7 +75,7 @@ def cmd_page(self, n):
 )
 def cmd_prev(self, n):
     if n <= 0:
-        raise InteractiveConsole.InvalidCommand("The first argument should be positive. Use \"next\" instead.")
+        raise InvalidCommand("The first argument should be positive. Use \"next\" instead.")
     if self.cur_scene.page_change(-n):
         self.update_history()
 
@@ -87,6 +88,6 @@ def cmd_prev(self, n):
 )
 def cmd_next(self, n):
     if n <= 0:
-        raise InteractiveConsole.InvalidCommand("The first argument should be positive. Use \"prev\" instead.")
+        raise InvalidCommand("The first argument should be positive. Use \"prev\" instead.")
     if self.cur_scene.page_change(n):
         self.update_history()
