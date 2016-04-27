@@ -167,7 +167,7 @@ True
 Assigning operators are always operated last.
 
 @section(5.4) Parentheses
-Precedence can be overriden by using parentheses [35;1m()[0m.
+Precedence can be overriden by using parentheses ([32;1m()[0m).
 When precedence is not clear (i.e. when you are not sure), it is advised to use parentheses.
 
 @eg(10):

@@ -1,0 +1,27 @@
+characters [32;1m
+variables [31;1m
+usage variables [36;1m
+suite [33;7m
+operators [35;1m
+
+[0m
+
+COLORS = {
+    30: "black",
+    31: "red",
+    32: "green",
+    33: "yellow",
+    34: "blue",
+    35: "magenta",
+    36: "cyan",
+    37: "gray"
+}
+
+MODES = {
+    0: "default",
+    1: "bold",
+    2: "dark",
+    4: "underline",
+    7: "fill",
+    9: "strike"
+}

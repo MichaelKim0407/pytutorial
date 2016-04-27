@@ -30,7 +30,7 @@ Valid names: [31;1mmike[0m, [31;1m_i[0m, [31;1ma_programmer[0m, [31;1maBa
 Invalid names: [31;1m2k[0m, [31;1mproject-name[0m
 
 @section(2) Assigning an variable
-Variables can be assigned a value by using the assign operator ([32;1m=[0m), and can be used in calculations thereafter.
+Variables can be assigned a value by using the assign operator ([35;1m=[0m), and can be used in calculations thereafter.
 
 @eg(1):
 {
