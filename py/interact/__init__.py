@@ -104,8 +104,8 @@ class InteractiveConsole(object):
         return decor
 
     @classmethod
-    def command_global(cls, name, *args):
-        cmd_info = CommandInfo(*args)
+    def command_global(cls, name, *args, **kwargs):
+        cmd_info = CommandInfo(*args, **kwargs)
         _decor = InteractiveConsole._command(name, cmd_info.args_def)
 
         def decor(func):
@@ -115,8 +115,8 @@ class InteractiveConsole(object):
 
         return decor
 
-    def command(self, name, *args):
-        cmd_info = CommandInfo(*args)
+    def command(self, name, *args, **kwargs):
+        cmd_info = CommandInfo(*args, **kwargs)
         _decor = InteractiveConsole._command(name, cmd_info.args_def)
 
         def decor(func):

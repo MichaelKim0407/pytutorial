@@ -41,7 +41,7 @@ class Main(object):
             "start",
             (),
             "View contents in this tutorial.",
-            True
+            is_simple=True
         )
         def cmd_start(_self):
             _self.set_scene("Contents")
@@ -50,7 +50,7 @@ class Main(object):
             "chapter",
             ((int,),),
             "Open a chapter of the tutorial.",
-            True
+            is_simple=True
         )
         def cmd_chapter(_self, n):
             try:

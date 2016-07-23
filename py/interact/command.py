@@ -73,10 +73,22 @@ class CommandArgsDef(list):
 
 
 class CommandInfo(object):
-    def __init__(self, types, help_info, is_simple=False):
+    def __init__(self, types, help_info, long_info=None, is_simple=False):
         self.args_def = CommandArgsDef(*types)
         self.help_info = help_info
+        self.long_info = long_info
         self.is_simple = is_simple
 
     def help_short(self, name):
-        return "\t{}\t\t{}\n\t\t\t{}".format(name, self.args_def, self.help_info)
+        return "\t{}\t\t{}\n\t\t\t{}".format(
+            name,
+            self.args_def,
+            self.help_info.replace("\n", "\n\t\t\t")
+        )
+
+    def help_long(self, name):
+        return "Name:\n\t{}\nArguments:\n\t{}\nInfo:\n\t{}".format(
+            name,
+            self.args_def,
+            self.help_info.replace("\n", "\n\t")
+        ) + ("\nFull help:\n\t{}".format(self.long_info.replace("\n", "\n\t")) if self.long_info is not None else "")

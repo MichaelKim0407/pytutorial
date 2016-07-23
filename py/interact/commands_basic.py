@@ -1,9 +1,8 @@
 import subprocess
 
-from mklibpy.util.path import CD
-
 from error import InvalidCommand
 from interact import InteractiveConsole
+from mklibpy.util.path import CD
 
 __author__ = 'Michael'
 
@@ -21,7 +20,7 @@ def cmd_refresh(self):
     "exit",
     (),
     "Exit the interactive tutorial.",
-    True
+    is_simple=True
 )
 def cmd_exit(self):
     raise InteractiveConsole.ExitCommand
@@ -62,7 +61,7 @@ def cmd_forward(self, n):
     "page",
     ((int,),),
     "Turn to a different page in the current scene.",
-    True
+    is_simple=True
 )
 def cmd_page(self, n):
     if self.cur_scene.page(n - 1):
@@ -73,7 +72,7 @@ def cmd_page(self, n):
     "prev",
     ((int, 1),),
     "Turn to a previous page in the current scene.",
-    True
+    is_simple=True
 )
 def cmd_prev(self, n):
     if n <= 0:
@@ -86,7 +85,7 @@ def cmd_prev(self, n):
     "next",
     ((int, 1),),
     "Turn to a later page in the current scene.",
-    True
+    is_simple=True
 )
 def cmd_next(self, n):
     if n <= 0:
@@ -99,7 +98,7 @@ def cmd_next(self, n):
     "python",
     (None,),
     "Start interactive Python console, or run a Python script.",
-    True
+    is_simple=True
 )
 def cmd_python(self, *args):
     with CD("scripts"):
