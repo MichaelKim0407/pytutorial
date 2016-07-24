@@ -1,0 +1,228 @@
+@chapter(9) Type conversion
+In chapter 1~3 we learned about integers, non-integers and strings;
+in chapter 7 we learned about lists.
+These are all types in python.
+
+Most operations and functions require specific types (or type combinations) to work properly.
+
+@eg(1):
+{
+>>> len(1)
+
+Traceback (most recent call last):
+  File "<pyshell#25>", line 1, in <module>
+    len(1)
+TypeError: object of type 'int' has no len()
+>>> range("abc")
+
+Traceback (most recent call last):
+  File "<pyshell#26>", line 1, in <module>
+    range("abc")
+TypeError: range() integer end argument expected, got str.
+>>> "s" + 2.5
+
+Traceback (most recent call last):
+  File "<pyshell#27>", line 1, in <module>
+    "s" + 2.5
+TypeError: cannot concatenate 'str' and 'float' objects
+}
+
+@pause()
+
+It is useful to convert values to a different type.
+
+@usage(1):
+{
+int([36;1mvalue[0m)
+float([36;1mvalue[0m)
+str([36;1mvalue[0m)
+}
+
+will convert [36;1mvalue[0m to integer/non-integer/string.
+
+@eg(2):
+{
+>>> int("10")
+10
+>>> 6 / 5, 6.0 / 5, float(6) / 5
+(1, 1.2, 1.2)
+>>> "s" + str(2.5)
+'s2.5'
+>>> int(3.2)
+3
+}
+
+@pause()
+
+@usage(2):
+{
+list([36;1mcollection[0m)
+}
+
+Only collections (see chapter 7) can be converted to lists.
+
+@eg(3):
+{
+>>> list(1)
+
+Traceback (most recent call last):
+  File "<pyshell#32>", line 1, in <module>
+    list(1)
+TypeError: 'int' object is not iterable
+>>> list("abc")
+['a', 'b', 'c']
+}
+
+@chapter(10) Modules
+@section(1) Definition
+A module is a .py file that can be executed as a program, or imported for reusability.
+
+@section(2) Creating a module
+Creating a module is as simple as creating a text file, and writing python code in it.
+The following stuff are useful if you want to create a module within terminal (recommended).
+
+----------
+Some useful terminal commands:
+cd DIR_NAME         Change current directory to DIR_NAME (that is a subfolder under current directory).
+                    The upper directory (i.e. parent folder) is ..
+vim FILE_NAME       Vim is a text editor that works in the terminal.
+                    FILE_NAME can either be an existing file (for edit), or a new file (for create).
+
+The tab key can be used for auto-completion of DIR_NAME or FILE_NAME.
+
+Vim editor:
+The Vim editor does not starts with edit mode.
+To enter edit mode, press i. "--INSERT--" will appear at the lower left corner.
+To exit edit mode, press Esc.
+When not in the edit mode, press u to undo last change.
+When not in the edit mode, press : to start typing a Vim command. Useful Vim commands are:
+:w      Save the file
+:q      Quit Vim
+:wq     Save and quit
+:q!     Quit without saving
+----------
+
+Of course, you can edit the module outside of terminal, using other text editors.
+
+@section(3) Executing a module
+In the terminal (NOT the python console), type
+[33;2m$ python FILE_NAME[0m
+
+@script(1)
+
+@eg(1):
+{
+$ python m10_1.py (remember to hit tab for auto-completion)
+Hello!
+}
+
+@section(4) Importing a module
+In the python console (NOT the terminal), or in another python module,
+
+@usage(1):
+{
+import [36;1mmodule_name[0m
+import [36;1mmodule_name[0m as [36;1mnew_name[0m
+}
+
+[37;7mNote[0m [36;1mmodule_name[0m does not include ".py".
+[37;7mNote[0m Python console must be started in the same directory of the module.
+
+After importing a module, everything declared in the module (variables, functions, etc.) can be accessed as [36;1mmodule_name[0m.[36;1midentifier[0m
+
+@script(2)
+
+@eg(2):
+{
+>>> import m10_2
+>>> m10_2.is_prime(10)
+False
+>>> m10_2.is_prime(11)
+True
+}
+
+@section(5) Importing from a module
+Individual identifiers can be imported.
+
+@usage(2):
+{
+from [36;1mmodule_name[0m import [36;1midentifier[0m
+from [36;1mmodule_name[0m import [36;1midentifier[0m as [36;1mnew_identifier[0m
+}
+
+@eg(3):
+{
+>>> from m10_2 import is_prime
+>>> is_prime(7)
+True
+>>> from m10_2 import is_prime as p
+>>> p(8)
+False
+}
+
+@pause()
+
+It is also possible to import all identifiers by
+
+@usage(3):
+{
+from [36;1mmodule_name[0m import *
+}
+
+[37;7mImportant[0m If identifiers are imported into a module through this method, it will also become identifiers of that module, thus creating a confusion:
+[31;1mmodule_name_1[0m.[31;1midentifier[0m and [31;1mmodule_name_2[0m.[31;1midentifier[0m may refer to the same thing.
+"[35;1mimport[0m [31;1mmodule_name_1[0m" in [31;1mmodule_name_2[0m will NOT cause this problem.
+Thus, "[35;1mfrom[0m ... [35;1mimport[0m ..." should be used with caution when writing multi-module programs, and "[35;1mfrom[0m ... [35;1mimport[0m *" should be strictly avoided.
+
+@section(6) Executing a module II: Passing arguments
+Arguments can be passed to the python program, from the terminal:
+[33;2m$ python FILENAME(arg0) arg1 arg2 ...[0m
+
+Arguments are stored in the variable [31;1margv[0m in module [31;1msys[0m.
+They can be accessed by importing [31;1msys[0m or [31;1margv[0m.
+
+@script(3)
+
+@eg(4):
+{
+$ python m10_3.py 5
+True
+
+$ python m10_3.py 10
+False
+}
+
+@section(7) Importing modules II
+When importing a module (either "[35;1mimport[0m ..." or "[35;1mfrom[0m ... [35;1mimport[0m ..."), the module will be executed first.
+Each module can only be executed once.
+
+@script(1)
+
+@eg(5):
+{
+>>> import m10_1
+Hello!
+>>> from m10_1 import *
+(No output, because m10_1 has already been executed)
+}
+
+@pause()
+
+In most cases however, when importing a module, what we want is only the identifiers inside that module.
+We do not want it to print out things. More importantly, since some modules requires arguments to work, like m10_3.py, it can cause an error to import them, because [31;1msys.argv[0m does not have enough arguments.
+
+By checking if the variable [31;1m__name__[0m equals [32;2m"__main__"[0m, we can tell if a module is imported or executed.
+It is [35;1mTrue[0m only when the module is directly executed from the terminal.
+
+@script(4)
+
+@eg(6):
+{
+>>> import m10_4
+>>> m10_4.is_prime(13)
+True
+
+# Terminal
+$ python m10_4.py 100
+False
+}

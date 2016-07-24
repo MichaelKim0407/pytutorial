@@ -4,6 +4,9 @@ usage variables [36;1m
 suite [33;7m
 operators and keywords [35;1m
 types [36;2m
+console [33;2m
+strings [32;2m
+hint [37;7m
 
 [0m
 
