@@ -25,3 +25,7 @@ InteractiveConsole.add_scene_global(
 HELP_FULL_TEXT = """A list of available commands:
 \tName\t\tNotes
 """
+
+HELP_ALIASES = """A list of available aliases:
+\tAlias\t\tReplaces
+"""

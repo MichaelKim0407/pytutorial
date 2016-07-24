@@ -1,8 +1,9 @@
 import subprocess
 
+from mklibpy.util.path import CD
+
 from error import InvalidCommand
 from interact import InteractiveConsole
-from mklibpy.util.path import CD
 
 __author__ = 'Michael'
 
@@ -26,6 +27,9 @@ def cmd_exit(self):
     raise InteractiveConsole.ExitCommand
 
 
+InteractiveConsole.alias_global("q", "exit")
+
+
 @InteractiveConsole.command_global(
     "history",
     ((int,),),
@@ -46,6 +50,9 @@ def cmd_back(self, n):
     self.change_history(-n)
 
 
+InteractiveConsole.alias_global("<", "back")
+
+
 @InteractiveConsole.command_global(
     "forward",
     ((int, 1),),
@@ -55,6 +62,9 @@ def cmd_forward(self, n):
     if n <= 0:
         raise InvalidCommand("The first argument should be positive. Use \"back\" instead.")
     self.change_history(n)
+
+
+InteractiveConsole.alias_global(">", "forward")
 
 
 @InteractiveConsole.command_global(
@@ -81,6 +91,9 @@ def cmd_prev(self, n):
         self.update_history()
 
 
+InteractiveConsole.alias_global(",", "prev")
+
+
 @InteractiveConsole.command_global(
     "next",
     ((int, 1),),
@@ -92,6 +105,9 @@ def cmd_next(self, n):
         raise InvalidCommand("The first argument should be positive. Use \"prev\" instead.")
     if self.cur_scene.page_change(n):
         self.update_history()
+
+
+InteractiveConsole.alias_global(".", "next")
 
 
 @InteractiveConsole.command_global(

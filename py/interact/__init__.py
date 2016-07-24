@@ -16,6 +16,7 @@ class InteractiveConsole(object):
     def __init__(self):
         self.scenes = list(self.__class__.Scenes)
         self.commands = dict(self.__class__.Commands)
+        self.aliases = dict(self.__class__.Aliases)
         self.cur_scene = self.find_scene("Main Menu")
         self.history = [(self.cur_scene, self.cur_scene.cur_page)]
         self.history_pointer = 0
@@ -61,10 +62,9 @@ class InteractiveConsole(object):
         self.refresh()
         while True:
             usr_input = raw_input(":")
-            split = usr_input.split()
-            if not split:
+            cmd, args = self.parse_cmd_line(usr_input)
+            if not cmd:
                 continue
-            cmd, args = split[0], split[1:]
             if cmd not in self.commands:
                 self.warn("No such command: \"{}\".".format(cmd))
             else:
@@ -125,6 +125,31 @@ class InteractiveConsole(object):
             return new_func
 
         return decor
+
+    Aliases = dict()
+
+    @classmethod
+    def alias_global(cls, alias, *replace):
+        if alias in cls.Aliases:
+            raise ValueError(alias)
+        cls.Aliases[alias] = replace
+
+    def alias(self, alias, *replace):
+        if alias in self.aliases:
+            raise ValueError(alias)
+        self.aliases[alias] = replace
+
+    def parse_cmd_line(self, line):
+        split = line.split()
+        if not split:
+            return "", [""]
+        result = []
+        for item in split:
+            if item in self.aliases:
+                result.extend(self.aliases[item])
+            else:
+                result.append(item)
+        return result[0], result[1:]
 
 
 import commands_basic
