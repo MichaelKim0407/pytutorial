@@ -112,6 +112,14 @@ Braces can be indexed or even keyworded, allowing you to better organize your va
 '10 5 10 xyz'
 }
 
+@section(1) Exercise
+
+What are they? What are the differences between them?
+[31;1m1[0m
+[32;2m"1"[0m
+[32;2m"x"[0m
+[31;1mx[0m
+
 @chapter(4) Functions
 @section(1) Definition
 A function is a procedure that (optionally) takes input values, completes a certain task, and (also optionally) provides output values.
