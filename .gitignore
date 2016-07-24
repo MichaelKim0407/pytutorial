@@ -2,4 +2,4 @@
 
 *.py[cod]
 py/test/
-data/temp/
+temp/

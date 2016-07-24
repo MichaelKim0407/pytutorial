@@ -56,19 +56,18 @@ class Parser(object):
         elif tag.tag == "pause":
             self.cur_sect.text += data.TextPause()
 
-    def load_file(self, filename):
-        with open(filename) as f:
-            lines = [line.rstrip("\n") for line in f.readlines()]
-            self.cur_chap = None
-            while lines:
-                if lines[0].startswith("@"):
-                    tag = Parser.parse_tag(lines)
-                    self.run_tag(tag)
-                    if not lines:
-                        break
-                else:
-                    self.cur_sect.text += lines[0] + "\n"
-                lines.pop(0)
-            for chap in self.chapters:
-                chap.base_section.sort()
+    def load_file(self, file):
+        lines = file.split("\n")
+        self.cur_chap = None
+        while lines:
+            if lines[0].startswith("@"):
+                tag = Parser.parse_tag(lines)
+                self.run_tag(tag)
+                if not lines:
+                    break
+            else:
+                self.cur_sect.text += lines[0] + "\n"
+            lines.pop(0)
+        for chap in self.chapters:
+            chap.base_section.sort()
         return self.chapters

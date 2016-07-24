@@ -1,15 +1,18 @@
-import os
-
 import interact
 import loader
+import resource
 
 __author__ = 'Michael'
 
 
 class Main(object):
     def __init__(self):
-        self.loaded_files = []
+        self.resources = None
         self.chapters = []
+
+    def load_resources(self, resource_root_dir):
+        res_loader = resource.ResourceLoader(resource_root_dir)
+        self.resources = res_loader.load_all()
 
     def find_chapter(self, chap_id):
         for chap in self.chapters:
@@ -18,17 +21,15 @@ class Main(object):
         raise ValueError(chap_id)
 
     def load_file(self, filename):
-        if filename in self.loaded_files:
-            return
-        self.loaded_files.append(filename)
         parser = loader.Parser()
-        self.chapters.extend(parser.load_file(filename))
+        file = self.resources["tutorial"][filename].content
+        self.chapters.extend(parser.load_file(file))
 
     def load_dir(self, dir, match):
-        for filename in sorted(os.listdir(dir)):
+        for filename in self.resources.list_resources("tutorial"):
             if not match(filename):
                 continue
-            self.load_file(os.path.join(dir, filename))
+            self.load_file(filename)
 
     def chapter_scenes(self, console):
         l_chapters = "Use \"chapter X\" command to view a chapter.\n\n"
@@ -105,5 +106,6 @@ if __name__ == "__main__":
 
         options.DEBUG = True
     main = Main()
+    main.load_resources("resource")
     main.load_dir("data", lambda n: n.startswith("python_") and n.endswith(".txt"))
     main.start_interactive()
