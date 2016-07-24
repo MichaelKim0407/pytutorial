@@ -20,7 +20,8 @@ def cmd_main(self):
 @InteractiveConsole.command_global(
     "help",
     ((str, "--simple"),),
-    """Open help menu. By default (--simple), only frequently used commands are listed.
+    "Open help menu.",
+    """By default (--simple), only frequently used commands are listed.
 To view all commands, use -A/--all option.
 To view help for a specific command, use command name as the argument.
 To view aliases, use --aliases.""",

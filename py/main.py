@@ -63,8 +63,7 @@ class Main(object):
             "eg",
             ((str,), (str,)),
             "View an example in the tutorial.",
-            """View an example in the tutorial.
-The first argument is the chapter id and the second one is the example id."""
+            """The first argument is the chapter id and the second one is the example id."""
         )
         def cmd_eg(_self, chap_id, eg_id):
             try:
@@ -76,8 +75,7 @@ The first argument is the chapter id and the second one is the example id."""
             "usage",
             ((str,), (str,)),
             "View an usage in the tutorial.",
-            """View an usage in the tutorial.
-The first argument is the chapter id and the second one is the usage id."""
+            """The first argument is the chapter id and the second one is the usage id."""
         )
         def cmd_usage(_self, chap_id, usage_id):
             try:
@@ -89,8 +87,7 @@ The first argument is the chapter id and the second one is the usage id."""
             "syntax",
             ((str,), (str,)),
             "View a syntax definition in the tutorial."
-            """View a syntax definition in the tutorial.
-The first argument is the chapter id and the second one is the syntax id."""
+            """The first argument is the chapter id and the second one is the syntax id."""
         )
         def cmd_syntax(_self, chap_id, syntax_id):
             try:
@@ -102,8 +99,7 @@ The first argument is the chapter id and the second one is the syntax id."""
             "script",
             ((str,), (str,)),
             "View a script",
-            """View a script.
-The first argument is the chapter id and the second one is the script id."""
+            """The first argument is the chapter id and the second one is the script id."""
         )
         def cmd_script(_self, chap_id, script_id):
             try:

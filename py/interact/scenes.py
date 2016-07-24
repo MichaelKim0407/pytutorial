@@ -12,7 +12,10 @@ Enter help for usage tips.
 """
 )
 
-HELP_TEXT = """For the full list, use \"help -A\"
+HELP_TEXT = """For the full list, use "help -A"
+For a specific command, use "help (COMMAND_NAME)"
+For aliases, use "help --aliases"
+
 A list of useful commands:
 \tName\t\tNotes
 """

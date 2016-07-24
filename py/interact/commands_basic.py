@@ -21,6 +21,7 @@ def cmd_refresh(self):
     "exit",
     (),
     "Exit the interactive tutorial.",
+    """Alias: q""",
     is_simple=True
 )
 def cmd_exit(self):
@@ -42,7 +43,9 @@ def cmd_history(self, n):
 @InteractiveConsole.command_global(
     "back",
     ((int, 1),),
-    "Change to a page you viewed before this page."
+    "Change to a page you viewed before this page.",
+    """The optional argument is the number of pages.
+Alias: <"""
 )
 def cmd_back(self, n):
     if n <= 0:
@@ -56,7 +59,9 @@ InteractiveConsole.alias_global("<", "back")
 @InteractiveConsole.command_global(
     "forward",
     ((int, 1),),
-    "Change to a page you viewed after this page."
+    "Change to a page you viewed after this page.",
+    """The optional argument is the number of pages.
+Alias: >"""
 )
 def cmd_forward(self, n):
     if n <= 0:
@@ -82,6 +87,8 @@ def cmd_page(self, n):
     "prev",
     ((int, 1),),
     "Turn to a previous page in the current scene.",
+    """The optional argument is the number of pages.
+Alias: ,""",
     is_simple=True
 )
 def cmd_prev(self, n):
@@ -98,6 +105,8 @@ InteractiveConsole.alias_global(",", "prev")
     "next",
     ((int, 1),),
     "Turn to a later page in the current scene.",
+    """The optional argument is the number of pages.
+Alias: .""",
     is_simple=True
 )
 def cmd_next(self, n):
@@ -114,6 +123,8 @@ InteractiveConsole.alias_global(".", "next")
     "python",
     (None,),
     "Start interactive Python console, or run a Python script.",
+    """The working directory will be resource/script.
+You can directly import/execute scripts in that folder.""",
     is_simple=True
 )
 def cmd_python(self, *args):
