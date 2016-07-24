@@ -123,6 +123,23 @@ If it is difficult to write [36;1mexpression[0m, or if you want to end the loo
 ...             x += 1
 
 
+>>> f1(3)
+3
+2
+1
+>>> f1(-2)
+-2
+-1
+>>> f1(0)
+}
+
+@pause()
+
+When using the while loop, it is important to ensure that the loop can finish, either using proper [36;1mexpression[0m or using the [35;1mbreak[0m statement.
+If it is difficult to write [36;1mexpression[0m, or if you want to end the loop in the middle of [33;7msuite[0m, the [35;1mbreak[0m statement becomes very handy.
+
+@eg(7):
+{
 >>> def f2(x):
 ...     # always prints 0
 ...     while True:
@@ -135,23 +152,15 @@ If it is difficult to write [36;1mexpression[0m, or if you want to end the loo
 ...             x += 1
 
 
->>> f1(3)
-3
-2
-1
 >>> f2(3)
 3
 2
 1
 0
->>> f1(-2)
--2
--1
 >>> f2(-2)
 -2
 -1
 0
->>> f1(0)
 >>> f2(0)
 0
 }
@@ -172,7 +181,7 @@ else:
 }
 
 [33;7msuite_else[0m is executed only if the loop finished without hitting a [35;1mbreak[0m statement.
-Important: The usage of [35;1melse[0m here is not to be confused with that in the [35;1mif[0m statement.
+[37;7mImportant[0m The usage of [35;1melse[0m here is not to be confused with that in the [35;1mif[0m statement.
 
 @eg(7):
 {
