@@ -6,4 +6,4 @@ def is_prime(x):
     return True
 
 from sys import argv
-print is_prime(int(argv[1]))
+print(is_prime(int(argv[1])))
