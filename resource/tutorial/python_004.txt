@@ -199,3 +199,7 @@ False
 >>> is_prime(7)
 True
 }
+
+@section(5) Exercise
+
+Define a function with one parameter [31;1mx[0m, which prints 1, 2, 4, 8, ..., 2 ^ [31;1mx[0m each in a different line.

@@ -27,6 +27,8 @@ Traceback (most recent call last):
 TypeError: cannot concatenate 'str' and 'float' objects
 }
 
+[37;7mDo you remember?[0m How can you insert a number into a string? See Chapter 3.
+
 @pause()
 
 It is useful to convert values to a different type.
@@ -115,6 +117,8 @@ In the terminal (NOT the python console), type
 $ python m10_1.py (remember to hit tab for auto-completion)
 Hello!
 }
+
+[37;7mDid you know?[0m You can execute scripts directly in this tutorial. Try "python m10_1.py" now!
 
 @section(4) Importing a module
 In the python console (NOT the terminal), or in another python module,
@@ -218,6 +222,7 @@ It is [35;1mTrue[0m only when the module is directly executed from the termina
 
 @eg(6):
 {
+# Python Console
 >>> import m10_4
 >>> m10_4.is_prime(13)
 True
@@ -226,3 +231,11 @@ True
 $ python m10_4.py 100
 False
 }
+
+@section(8) Exercise
+
+What is the difference between "[35;1mimport[0m ..." and "[35;1mfrom[0m ... [35;1mimport[0m ..."?
+
+@pause()
+
+You want a script to print "Hello!" when executed from the terminal, but to print "Imported!" when imported by another module. How can you achieve it?

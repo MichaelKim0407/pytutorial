@@ -254,3 +254,7 @@ Note that if an expression passes the evaluation, all the remaining statements w
 
 leap year
 }
+
+@section(3) Exercise
+
+Define a function (see Chapter 4) with one parameter [31;1mx[0m, which prints [32;2m"odd"[0m if [31;1mx[0m is an odd number, and [32;2m"even"[0m if [31;1mx[0m is an even number.

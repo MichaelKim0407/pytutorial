@@ -16,17 +16,17 @@ An [36;2mIndexError[0m is raised if the given index is invalid.
 
 @eg(2):
 {
->>> l = [1, 2, 3, 7, 6]
->>> l[1]
+>>> li = [1, 2, 3, 7, 6]
+>>> li[1]
 2
->>> l[3] = 18
->>> l
+>>> li[3] = 18
+>>> li
 [1, 2, 3, 18, 6]
->>> l[7]
+>>> li[7]
 
 Traceback (most recent call last):
   File "<pyshell#93>", line 1, in <module>
-    l[7]
+    li[7]
 IndexError: list index out of range
 }
 
@@ -36,10 +36,10 @@ A list itself is also a value, which means it can be assigned to a variable, or 
 
 @eg(3):
 {
->>> l = [1, 3, [4, 5], 7]
->>> l[2]
+>>> li = [1, 3, [4, 5], 7]
+>>> li[2]
 [4, 5]
->>> l[2][1]
+>>> li[2][1]
 5
 }
 
@@ -63,9 +63,9 @@ Appending adds a value at the end of the list.
 
 @eg(5):
 {
->>> l = [1, 3]
->>> l.append(5)
->>> l
+>>> li = [1, 3]
+>>> li.append(5)
+>>> li
 [1, 3, 5]
 }
 
@@ -76,9 +76,9 @@ Apart from adding a value to the end, you can also insert a value between two va
 
 @eg(6):
 {
->>> l = [1, 3]
->>> l.insert(1, 2)
->>> l
+>>> li = [1, 3]
+>>> li.insert(1, 2)
+>>> li
 [1, 2, 3]
 }
 
@@ -88,9 +88,9 @@ Apart from adding a value to the end, you can also insert a value between two va
 
 @eg(7):
 {
->>> l = [1, 4, 6]
->>> l.remove(4)
->>> l
+>>> li = [1, 4, 6]
+>>> li.remove(4)
+>>> li
 [1, 6]
 }
 
@@ -98,9 +98,9 @@ When there are more than one identical values in the list, the first one will be
 
 @eg(8):
 {
->>> l = [0, 10, 1, 10, 2, 10]
->>> l.remove(10)
->>> l
+>>> li = [0, 10, 1, 10, 2, 10]
+>>> li.remove(10)
+>>> li
 [0, 1, 10, 2, 10]
 }
 
@@ -111,10 +111,10 @@ Remove a value by its index. This is useful when one or more identical values ex
 
 @eg(9):
 {
->>> l = [0, 10, 1, 10, 2, 10]
->>> l.pop(3)
+>>> li = [0, 10, 1, 10, 2, 10]
+>>> li.pop(3)
 10
->>> l
+>>> li
 [0, 10, 1, 2, 10]
 }
 
@@ -169,27 +169,27 @@ Two lists can be added together, using the add operator ([35;1m+[0m).
 {
 >>> [1] + [3, 8]
 [1, 3, 8]
->>> l = [2, 6, 7]
->>> l += [5, 1]
->>> l
+>>> li = [2, 6, 7]
+>>> li += [5, 1]
+>>> li
 [2, 6, 7, 5, 1]
 }
 
 @section(4.2) Negative index
 Python supports negative indices. While non-negative indices mean counting from the beginning (left), negative indices mean counting from the end (right).
 
-A list named [31;1ml[0m has a length of n:
-Position:       First   Second  Third   ... 2.Last  Last
-Index:          0       1       2       ... n-2     n-1
-Left access:    [31;1ml[0m[0]    [31;1ml[0m[1]    [31;1ml[0m[2]    ... [31;1ml[0m[n-2]  [31;1ml[0m[n-1]
-Right access:   [31;1ml[0m[-n]   [31;1ml[0m[-n+1] [31;1ml[0m[-n+2] ... [31;1ml[0m[-2]   [31;1ml[0m[-1]
+A list named [31;1mli[0m has a length of n:
+Position:       First    Second   Third    ... 2.Last   Last
+Index:          0        1        2        ... n-2      n-1
+Left access:    [31;1mli[0m[0]    [31;1mli[0m[1]    [31;1mli[0m[2]    ... [31;1mli[0m[n-2]  [31;1mli[0m[n-1]
+Right access:   [31;1mli[0m[-n]   [31;1mli[0m[-n+1] [31;1mli[0m[-n+2] ... [31;1mli[0m[-2]   [31;1mli[0m[-1]
 
 @eg(14):
 {
->>> l = range(5)
->>> l
+>>> li = range(5)
+>>> li
 [0, 1, 2, 3, 4]
->>> l[-1]
+>>> li[-1]
 4
 }
 
@@ -199,20 +199,20 @@ Like non-negative indices, negative indices will also result in [36;2mIndexErro
 
 @eg(15):
 {
->>> l = range(3, 7)
->>> l
+>>> li = range(3, 7)
+>>> li
 [3, 4, 5, 6]
->>> l[4]
+>>> li[4]
 
 Traceback (most recent call last):
   File "<pyshell#25>", line 1, in <module>
-    l[4]
+    li[4]
 IndexError: list index out of range
->>> l[-5]
+>>> li[-5]
 
 Traceback (most recent call last):
   File "<pyshell#26>", line 1, in <module>
-    l[-5]
+    li[-5]
 IndexError: list index out of range
 }
 
@@ -226,13 +226,17 @@ Negative indices can be used in slicing.
 
 @eg(16):
 {
->>> l = range(3, 7)
->>> l
+>>> li = range(3, 7)
+>>> li
 [3, 4, 5, 6]
->>> l[1:3]
+>>> li[1:3]
 [4, 5]
->>> l[1:]
+>>> li[1:]
 [4, 5, 6]
->>> l[:-1]
+>>> li[:-1]
 [3, 4, 5]
 }
+
+@section(5) Exercise
+
+Define a function (see Chapter 4) with one parameter [31;1mli[0m (a list), which returns the first, third, fifth, ... elements of [31;1mli[0m as a list.

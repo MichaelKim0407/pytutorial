@@ -9,6 +9,8 @@ Python can be used as a calculator.
 6.28
 }
 
+[37;7mDid you know?[0m Enter command "python" and start Python console within this tutorial! In the Python console, enter exit() to return.
+
 @pause()
 
 It is worth noting that in computer calculations, integers and non-integers are completely different. When both operands are integers, the calculation will be integral.
@@ -164,3 +166,23 @@ Optionally, a function can contain [35;1mreturn[0m statements, passing the val
 >>> print("{} squared is {}".format(5, squared(5)))
 5 squared is 25
 }
+
+@section(4) Exercise
+
+@eg(4):
+{
+>>> def squared(x):
+...     result = x * x
+...     print(result)
+...     return result
+
+>>> squared(5)
+25
+25
+}
+
+Explain why there are two "25" in the output.
+
+@pause()
+
+Define a function with one parameter [31;1mname[0m, which prints [32;2m"xxx, wake up!"[0m where [32;2mxxx[0m is the given [31;1mname[0m.
