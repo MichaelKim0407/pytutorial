@@ -117,5 +117,5 @@ InteractiveConsole.alias_global(".", "next")
     is_simple=True
 )
 def cmd_python(self, *args):
-    with CD("scripts"):
+    with CD("resource/script"):
         subprocess.call(["python"] + list(args))

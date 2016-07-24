@@ -4,11 +4,12 @@ __author__ = 'Michael'
 
 
 class Parser(object):
-    def __init__(self):
+    def __init__(self, resources):
         self.encoding = "UTF-8"
         self.chapters = []
         self.cur_chap = None
         self.cur_sect = None
+        self.resources = resources
 
     @staticmethod
     def parse_tag(lines):
@@ -52,6 +53,27 @@ class Parser(object):
                 tag.tag = "eg"
             item = data.Item(tag.tag, tag.args[0], tag.content)
             self.cur_chap.items.append(item)
+            self.cur_sect.text += item
+        elif tag.tag in ["script"]:
+            try:
+                # First, check if the item has already been created from requested resource
+                item = self.cur_chap.find_item(tag.tag, tag.args[0])
+            except ValueError:
+                # Create a new item
+                def __script_name(tag):
+                    return "m{}_{}.py".format(self.cur_chap.chap_id, tag.args[0])
+
+                resource_name = {
+                    "script": __script_name
+                }
+                item = data.Item(
+                    tag.tag,
+                    tag.args[0],
+                    self.resources[tag.tag][
+                        resource_name[tag.tag](tag)
+                    ].content
+                )
+                self.cur_chap.items.append(item)
             self.cur_sect.text += item
         elif tag.tag == "pause":
             self.cur_sect.text += data.TextPause()

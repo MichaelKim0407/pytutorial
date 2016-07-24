@@ -21,7 +21,7 @@ class Main(object):
         raise ValueError(chap_id)
 
     def load_file(self, filename):
-        parser = loader.Parser()
+        parser = loader.Parser(self.resources)
         file = self.resources["tutorial"][filename].content
         self.chapters.extend(parser.load_file(file))
 
@@ -62,7 +62,9 @@ class Main(object):
         @console.command(
             "eg",
             ((str,), (str,)),
-            "View an example in the tutorial. The first argument is the chapter id and the second one the the example id."
+            "View an example in the tutorial.",
+            """View an example in the tutorial.
+The first argument is the chapter id and the second one is the example id."""
         )
         def cmd_eg(_self, chap_id, eg_id):
             try:
@@ -73,22 +75,39 @@ class Main(object):
         @console.command(
             "usage",
             ((str,), (str,)),
-            "View an usage in the tutorial. The first argument is the chapter id and the second one the the usage id."
+            "View an usage in the tutorial.",
+            """View an usage in the tutorial.
+The first argument is the chapter id and the second one is the usage id."""
         )
-        def cmd_usage(_self, chap_id, eg_id):
+        def cmd_usage(_self, chap_id, usage_id):
             try:
-                print str(self.find_chapter(chap_id).find_item("usage", eg_id))
+                print str(self.find_chapter(chap_id).find_item("usage", usage_id))
             except ValueError:
                 print "Not found!"
 
         @console.command(
             "syntax",
             ((str,), (str,)),
-            "View a syntax definition in the tutorial. The first argument is the chapter id and the second one the the syntax id."
+            "View a syntax definition in the tutorial."
+            """View a syntax definition in the tutorial.
+The first argument is the chapter id and the second one is the syntax id."""
         )
-        def cmd_syntax(_self, chap_id, eg_id):
+        def cmd_syntax(_self, chap_id, syntax_id):
             try:
-                print str(self.find_chapter(chap_id).find_item("syntax", eg_id))
+                print str(self.find_chapter(chap_id).find_item("syntax", syntax_id))
+            except ValueError:
+                print "Not found!"
+
+        @console.command(
+            "script",
+            ((str,), (str,)),
+            "View a script",
+            """View a script.
+The first argument is the chapter id and the second one is the script id."""
+        )
+        def cmd_script(_self, chap_id, script_id):
+            try:
+                print str(self.find_chapter(chap_id).find_item("script", script_id))
             except ValueError:
                 print "Not found!"
 
